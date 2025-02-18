@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart'; // Import du package
 import 'package:uber_clone/auth/login_screen.dart';
+import 'package:uber_clone/methods/common_methods.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -16,6 +17,11 @@ class _SignupScreenState extends State<SignupScreen>
   TextEditingController passwordTextEditingController = TextEditingController();
   TextEditingController userPhoneTextEditingController =
       TextEditingController();
+  CommonMethods cMethods = CommonMethods();
+  // Vérifie si l'utilisateur est connecté à Internet
+  checkIfNetworkIsAvailable() {
+    cMethods.checkConnectivity(context);
+  }
 
   AnimationController? _controller;
   Animation<double>? _animation;
@@ -130,7 +136,8 @@ class _SignupScreenState extends State<SignupScreen>
                       const SizedBox(height: 20),
                       ElevatedButton(
                             onPressed: () {
-                              // Ajouter la logique d'inscription ici
+                              checkIfNetworkIsAvailable();
+                              //print('Checking Network');
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.white,
