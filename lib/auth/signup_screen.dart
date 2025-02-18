@@ -21,6 +21,23 @@ class _SignupScreenState extends State<SignupScreen>
   // Vérifie si l'utilisateur est connecté à Internet
   checkIfNetworkIsAvailable() {
     cMethods.checkConnectivity(context);
+
+    signUpFormValidation();
+  }
+
+  signUpFormValidation() {
+    if (userNameTextEditingController.text.trim().length < 3) {
+      cMethods.displaySnackBar('Please enter your name', context);
+    } else if (!emailTextEditingController.text.trim().contains('@')) {
+      cMethods.displaySnackBar('Please enter your email', context);
+    } else if (passwordTextEditingController.text.trim().length < 6) {
+      cMethods.displaySnackBar('Please enter your password', context);
+    } else if (userPhoneTextEditingController.text.trim().length < 10) {
+      cMethods.displaySnackBar('Please enter your phone number', context);
+    } else {
+      // Enregistrement de l'utilisateur
+      // signUpUser();
+    }
   }
 
   AnimationController? _controller;
